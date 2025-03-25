@@ -1,7 +1,31 @@
 [
     {
         "role": "user",
+        "content": "tesy",
+        "response_metadata": {}
+    },
+    {
+        "role": "assistant",
+        "content": "It looks like you just sent a typo! No worries, it happens to the best of us. Can you please rephrase or tell me what's on your mind? I'm here to help you with your coding, AI, or any other questions you may have!",
+        "response_metadata": {
+            "token_usage": {
+                "completion_tokens": 55,
+                "prompt_tokens": 76,
+                "total_tokens": 131,
+                "completion_time": 0.045833333,
+                "prompt_time": 0.009827713,
+                "queue_time": 0.24428822600000002,
+                "total_time": 0.055661046
+            },
+            "model_name": "llama3-8b-8192",
+            "system_fingerprint": "fp_dadc9d6142",
+            "finish_reason": "stop",
+            "logprobs": null
+        }
+    },
+    {
+        "role": "user",
         "content": "exit",
-        " response_metadata": {}
+        "response_metadata": {}
     }
 ]

@@ -1,3 +1,6 @@
 langchain
 langchain-groq
 dotenv
+duckduckgo-search
+rich
+prompt_toolkit
