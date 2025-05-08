@@ -1,1 +1,10 @@
 .env
+
+systemMessage.py
+
+__pycache__/
+venv/
+chat_memory.json
+searchHistory.json
+history.txt
+Test/

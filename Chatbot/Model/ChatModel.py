@@ -1,8 +1,5 @@
-import asyncio
-import json
 import os
 from getpass import getpass
-
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
@@ -10,7 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from rich.console import Console
 
 from ..store.Store import FileMemory
-
+from .systemMessage import SYSTEM_MESSAGE
 load_dotenv()
 
 console = Console()
@@ -48,19 +45,12 @@ async def ChatModelStructed(message: str, more: str = "conversation") -> str | b
             messages.append(AIMessage(content=msg['content']))
 
     # System message
-    system_message : str = """
-    You are a personal AI assistant created to help Panda, a 16-year-old self-taught developer from Ethiopia. 
-    Always be supportive, friendly, and help Panda learn code, AI, or solve problems.
-    {more}
-    """
+    system_message : str = SYSTEM_MESSAGE 
 
     prompt_template = ChatPromptTemplate.from_messages([
         ("system", system_message),
         ("user", "{text}")
     ])
-
-    # Format the full message
-    formatted_prompt = prompt_template.invoke({"more": more, "text": message})
 
     # Initialize LLM
     llm = init_chat_model("llama3-8b-8192", model_provider="groq")

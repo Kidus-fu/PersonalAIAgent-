@@ -4,3 +4,7 @@ dotenv
 duckduckgo-search
 rich
 prompt_toolkit
+langchain-community
+groq
+keyboard
+pynput

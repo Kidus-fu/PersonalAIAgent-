@@ -7,6 +7,9 @@ from rich.spinner import Spinner
 from rich.live import Live
 from Chatbot.Model.ChatModel import ChatModelStructed
 from Chatbot.store.Store import FileMemory
+import pyttsx3
+
+engine = pyttsx3.init()
 
 history_memore = FileMemory()
 
@@ -20,21 +23,27 @@ console = Console()
 async def startChat():
     while True:
         usermessage = await session.prompt_async("Message: ", completer=commands)
-
-        # usermessage = usermessage.strip().lower()
-       
-        # Display spinner while waiting
         spinner = Spinner("dots", text="[yellow]Thinking...[/yellow]")
         with Live(spinner, refresh_per_second=10):
-            history_memore.add_history(content=usermessage)
+            # stop save a history
+            # history_memore.add_history(content=usermessage)
             result = await ChatModelStructed(message=usermessage)
 
         if result:
             # Display the AI response beautifully in markdown and color
             console.print(Markdown(result), end="\n")
+            # Speak the AI response
+            uservoiceneeded = input("Do you want to hear the AI's voice? (y/n): ").strip().lower()
+            if uservoiceneeded == "y":
+                engine.say(result)
+                engine.setProperty('rate', 220)
+                engine.setProperty('volume', 1)
+                engine.setProperty('voice', 'english+f3')
+                engine.runAndWait()
+            else:
+                pass
         else:
             break
-
 # To run the startChat function properly:
 async def main():
     await startChat()

@@ -45,9 +45,17 @@ class FileMemory:
             json.dump(self.historydataget, f, indent=4)
             
     def savehistorydata(self):
-        with open(self.historydatapath, 'w') as f:
-            for entry in self.historydataget:
-                f.write(entry + "\n")
+        if os.path.exists(self.historydatapath):
+            with open(self.historydatapath, 'w') as f:
+                for entry in self.historydataget:
+                    f.write(entry + "\n")
+        else:
+            with open(self.historydatapath, 'w') as f:
+                defualt_history = ["clearmymessage","clearit","exit","buy","stop"]
+                for defualt in defualt_history:
+                    f.write(defualt + "\n")
+                for entry in self.get_historydata:
+                    f.write(entry + "\n")
 
     def get_historydata(self):
         return self.historydataget
